@@ -2,19 +2,14 @@
 properties([disableConcurrentBuilds()])
 
 pipeline {
-    agent any
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-        timestamps()
-    }
+    agent { dockerfile true }
     stages {
-        stage("create docker image") {
+        stage('Test') {
             steps {
-                echo " ============== start building image =================="
-      
-                sh 'docker build -t test . '
-                
+                echo "test"
             }
         }
     }
 }
+
+
