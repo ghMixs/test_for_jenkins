@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                docker service ls | grep jenkins && echo service-exists
-                docker service ls | grep web && echo service-exists
+                sh 'docker service ls | grep jenkins && echo service-exists'
+                sh 'docker service ls | grep web && echo service-exists'
             }
         }
     }
