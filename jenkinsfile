@@ -6,7 +6,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'docker images ls'
+                sh 'docker build -t test_nginx .'
+                sh 'docker run -p 10.8.0.1:80:80 -d test_nginx'
             }
         }
     }
