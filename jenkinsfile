@@ -6,30 +6,42 @@ pipeline {
     stages {
         stage('Build Docker'){
             steps {
-                 
-                    error "This pipeline stops here!"
+                script {
+                    def inspectExitCode = sh script: "docker build -t tmp_nginx .", returnStatus: true
+                    if (inspectExitCode == 0)
+                    {
+                        echo "Build succes"   
+                    }
+                    else {
+                        error "Build failed..."
+                    }
+                }
+                   
+                    
                  
             }
         }
         
-        
-        stage('Test') {
+        stage('Stop Service and Rename Docker'){
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'main') {
-                        echo 'I only execute on the master branch'
-                    } else {
-                        echo 'I execute elsewhere'
+                    def stop_service = sh script: "docker stop web", returnStatus: true
+                    if (stop_service == 0)
+                    {
+                        sh 'docker rm web'
                     }
                     
-                    def inspectExitCode = sh script: "docker stop web", returnStatus: true
-                    if (inspectExitCode == 0)
-                    {
-                        echo 'inspectExitCode'
-                    }
-                    else {
-                        echo 'stop'
-                    }
+                    def remove_container =  sh script: "docker image rm img_nginx", returnStatus: true
+                    sh 'docker image tag tmp_nginx img_nginx'
+                }
+            }
+        }
+        
+        
+        stage('Start docker') {
+            steps {
+                script {
+                    sh 'docker run -p 10.8.0.1:80:80 --name web -d img_nginx'
                 }
             }
         }
