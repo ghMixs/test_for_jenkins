@@ -33,6 +33,7 @@ pipeline {
                     
                     def remove_container =  sh script: "docker image rm img_nginx", returnStatus: true
                     sh 'docker image tag tmp_nginx img_nginx'
+                    sh 'docker rmi tmp_nginx'
                 }
             }
         }
