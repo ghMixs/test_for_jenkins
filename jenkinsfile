@@ -6,10 +6,9 @@ pipeline {
     stages {
         stage('Build Docker'){
             steps {
-               
-                 script {
+                 
                     error "This pipeline stops here!"
-                   }
+                 
             }
         }
         
