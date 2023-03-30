@@ -6,8 +6,11 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                sh 'docker stop web'
+                sh 'docker rm web'
+                sh 'docker image rm test_nginx'
                 sh 'docker build -t test_nginx .'
-                sh 'docker run -p 10.8.0.1:80:80 -d test_nginx'
+                sh 'docker run -p 10.8.0.1:80:80 --name web -d test_nginx'
             }
         }
     }
