@@ -12,6 +12,15 @@ pipeline {
                     } else {
                         echo 'I execute elsewhere'
                     }
+                    
+                    def inspectExitCode = sh script: "docker ps | grep jenkins", returnStatus: true
+                    if (inspectExitCode)
+                    {
+                        echo 'inspectExitCode'
+                    }
+                    else {
+                        echo 'stop'
+                    }
                 }
             }
         }
