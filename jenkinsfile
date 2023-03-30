@@ -4,6 +4,14 @@ properties([disableConcurrentBuilds()])
 pipeline {
     agent any
     stages {
+        stage('Build Docker'){
+            step{
+               
+                error "This pipeline stops here!"
+            }
+        }
+        
+        
         stage('Test') {
             steps {
                 script {
