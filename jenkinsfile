@@ -14,7 +14,7 @@ pipeline {
                     }
                     
                     def inspectExitCode = sh script: "docker stop web", returnStatus: true
-                    if (inspectExitCode)
+                    if (inspectExitCode == 0)
                     {
                         echo 'inspectExitCode'
                     }
