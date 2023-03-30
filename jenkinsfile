@@ -2,11 +2,11 @@
 properties([disableConcurrentBuilds()])
 
 pipeline {
-    agent { dockerfile true }
+    agent any
     stages {
         stage('Test') {
             steps {
-                echo "test"
+                sh 'docker images ls'
             }
         }
     }
