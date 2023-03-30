@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'docker stop web'
-                
+                docker service ls | grep jenkins && echo service-exists
+                docker service ls | grep web && echo service-exists
             }
         }
     }
