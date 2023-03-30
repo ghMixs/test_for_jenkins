@@ -5,9 +5,11 @@ pipeline {
     agent any
     stages {
         stage('Build Docker'){
-            step{
+            steps {
                
-                error "This pipeline stops here!"
+                 script {
+                    error "This pipeline stops here!"
+                   }
             }
         }
         
