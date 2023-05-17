@@ -42,7 +42,7 @@ pipeline {
         stage('Start docker') {
             steps {
                 script {
-                    sh 'docker run -p 10.8.0.1:80:5000 --name web -d img_nginx'
+                    sh 'docker run -p 10.8.0.1:5000:5000 --name web -d img_nginx'
                 }
             }
         }
